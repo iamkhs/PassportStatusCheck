@@ -17,8 +17,8 @@ public class HCaptchaAutomation {
     private static final Logger log = LoggerFactory.getLogger(HCaptchaAutomation.class);
 
     public static String getCaptchaResponse() {
-        System.setProperty("webdriver.chrome.driver", "/Users/iamkhs/Desktop/chromedriver-mac-arm64/chromedriver");
-//        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "/Users/iamkhs/Desktop/chromedriver-mac-arm64/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         // Configure ChromeDriver
         ChromeDriver driver = getChromeDriver();
