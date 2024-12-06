@@ -17,11 +17,13 @@ public class MainService {
 
     private static final Logger log = LoggerFactory.getLogger(MainService.class);
     private static final RestTemplate restTemplate = new RestTemplate();
+    private final static String API_URL = "https://www.epassport.gov.bd/api/v1/applications/check";
 
+
+    // This method is returning the current status of my application
     public static String runScript() {
 
         try {
-            String url = "https://www.epassport.gov.bd/api/v1/applications/check";
             String captchaResponse = HCaptchaAutomation.getCaptchaResponse();
             log.info("captcha {}", captchaResponse);
 
@@ -29,7 +31,7 @@ public class MainService {
             HttpEntity<MultiValueMap<String, String>> requestEntity = getMultiValueMapHttpEntity(captchaResponse);
 
             // Make POST request and get the response as a String
-            String response = restTemplate.postForObject(url, requestEntity, String.class);
+            String response = restTemplate.postForObject(API_URL, requestEntity, String.class);
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(response);
@@ -43,6 +45,7 @@ public class MainService {
         return null;
     }
 
+    // building the post request
     private static HttpEntity<MultiValueMap<String, String>> getMultiValueMapHttpEntity(String captchaResponse) {
         HttpHeaders headers = getHttpHeaders();
 
@@ -55,6 +58,7 @@ public class MainService {
         return new HttpEntity<>(body, headers);
     }
 
+    // building the http headers for post request
     private static HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);

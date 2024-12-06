@@ -23,8 +23,9 @@ public class EmailSenderService {
                     "Updated Status is: <h2>" + newStatus+"<h2>";
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessage.addHeader("X-Priority", "1"); // 1 = High priority
+            mimeMessage.addHeader("Importance", "high");
 
-            messageHelper.setFrom("noreply@notesventure.app", "noreply@notesventure.app");
             messageHelper.setTo("shantohossain.p@gmail.com");
             messageHelper.setText(mailBody ,true);
             messageHelper.setSubject("Congratulations \uD83C\uDF89\uD83D\uDE07, Status Updated\uD83E\uDD17");

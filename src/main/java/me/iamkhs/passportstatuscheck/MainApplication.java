@@ -31,7 +31,7 @@ public class MainApplication {
         System.out.println("inside method");
         String latestStatus = runScript();
         log.info("latest status {}", latestStatus);
-        if (!LAST_STATUS.equals(latestStatus)){
+        if (latestStatus != null && !LAST_STATUS.equals(latestStatus)){
             this.emailSenderService.sendMail(latestStatus);
         }
         LAST_STATUS = latestStatus;

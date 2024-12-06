@@ -25,6 +25,9 @@ dependencies {
 
     implementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
 
+// https://mvnrepository.com/artifact/com.twilio.sdk/twilio
+    implementation 'com.twilio.sdk:twilio:10.6.4'
+
 
 }
 
