@@ -19,6 +19,7 @@ public class MainApplication {
     private static String LAST_STATUS = "";
     private final EmailSenderService emailSenderService;
     private final SMSSenderService smsSenderService;
+    private static int COUNT = 0;
 
     public MainApplication(EmailSenderService emailSenderService, SMSSenderService smsSenderService) {
         this.emailSenderService = emailSenderService;
@@ -33,12 +34,24 @@ public class MainApplication {
     public void checkStatus(){
         System.out.println("inside method");
         String latestStatus = runScript();
-        log.info("latest status {}", latestStatus);
-        if (latestStatus != null && !LAST_STATUS.equals(latestStatus)){
-            this.smsSenderService.sendSms(latestStatus);
-            this.emailSenderService.sendMail(latestStatus);
+        log.info("latest status: {}", latestStatus);
+
+        if (isStatusChanged(latestStatus)) {
+            sendNotifications(latestStatus);
         }
+
         LAST_STATUS = latestStatus;
+        COUNT++;
+        log.info("count: {}", COUNT);
+    }
+
+    private boolean isStatusChanged(String latestStatus) {
+        return latestStatus != null && !LAST_STATUS.equals(latestStatus) && !LAST_STATUS.isEmpty();
+    }
+
+    private void sendNotifications(String latestStatus) {
+        this.smsSenderService.sendSms(latestStatus);
+        this.emailSenderService.sendMail(latestStatus);
     }
 
 }
