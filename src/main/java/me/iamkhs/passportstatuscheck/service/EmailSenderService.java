@@ -19,7 +19,7 @@ public class EmailSenderService {
 
     public void sendMail(String newStatus){
         try {
-            String mailBody = "Congratulations\uD83C\uDF89\uD83D\uDE07, Your Passport Status is Updated; " +
+            String mailBody = "Congratulations\uD83C\uDF89\uD83D\uDE07, My Passport Status is Updated; " +
                     "Updated Status is: <h2>" + newStatus+"<h2>";
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);

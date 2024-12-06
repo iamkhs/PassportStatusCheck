@@ -1,6 +1,7 @@
 package me.iamkhs.passportstatuscheck;
 
 import me.iamkhs.passportstatuscheck.service.EmailSenderService;
+import me.iamkhs.passportstatuscheck.service.SMSSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -17,9 +18,11 @@ public class MainApplication {
     private static final Logger log = LoggerFactory.getLogger(MainApplication.class);
     private static String LAST_STATUS = "";
     private final EmailSenderService emailSenderService;
+    private final SMSSenderService smsSenderService;
 
-    public MainApplication(EmailSenderService emailSenderService) {
+    public MainApplication(EmailSenderService emailSenderService, SMSSenderService smsSenderService) {
         this.emailSenderService = emailSenderService;
+        this.smsSenderService = smsSenderService;
     }
 
     public static void main(String[] args) {
@@ -32,6 +35,7 @@ public class MainApplication {
         String latestStatus = runScript();
         log.info("latest status {}", latestStatus);
         if (latestStatus != null && !LAST_STATUS.equals(latestStatus)){
+            this.smsSenderService.sendSms(latestStatus);
             this.emailSenderService.sendMail(latestStatus);
         }
         LAST_STATUS = latestStatus;
