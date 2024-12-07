@@ -46,7 +46,7 @@ public class MainApplication {
     }
 
     private boolean isStatusChanged(String latestStatus) {
-        return latestStatus != null && !LAST_STATUS.equals(latestStatus) && !LAST_STATUS.isEmpty();
+        return latestStatus != null && LAST_STATUS != null && !LAST_STATUS.equals(latestStatus) && !LAST_STATUS.isEmpty();
     }
 
     private void sendNotifications(String latestStatus) {
