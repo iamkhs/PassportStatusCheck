@@ -14,7 +14,7 @@ public class SMSSenderService {
 
     public void sendSms(String newStatus){
         final String ACCOUNT_SID = "AC022c5f0fda518517aec0b56798b9ed85";
-        final String AUTH_TOKEN = "0cd4b88e94f93839d18ba86ffe1306d8";
+        final String AUTH_TOKEN = "1a200bd5bee48923288033e8c28e7e68";
         final String twilioNumber = "+12025590250";
         final String recipientNumber = "+8801704546944";
         String messageBody = "Congratulations\uD83C\uDF89\uD83D\uDE07, My Passport Status is Updated, " +
